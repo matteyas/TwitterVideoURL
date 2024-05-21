@@ -89,7 +89,6 @@ class JSONStepper {
 }
 
 function findHighestBitrateUrl(jsonString) {
-	
 	const stepper = new JSONStepper(jsonString);
 	
 	stepper.seek('"source"');
