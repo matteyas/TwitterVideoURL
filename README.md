@@ -161,3 +161,8 @@ function injectLink(url) {
 1. The script hooks into XML requests (the hook is removed as soon as a match is found)
 2. Once the appropriate request response is found, it extracts the MP4 URL
 3. Finally, it injects a clickable button that redirects to the found URL
+
+<details>
+<summary>METADATA</summary>
+\#twitter \#download \#video \#url \#twitter-download \#twitter-download-video
+</details>
