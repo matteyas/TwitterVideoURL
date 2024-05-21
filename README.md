@@ -164,5 +164,5 @@ function injectLink(url) {
 
 <details>
 <summary>METADATA</summary>
-\#twitter \#download \#video \#url \#twitter-download \#twitter-download-video
+#twitter #download #video #url #twitter-download #twitter-download-video
 </details>
