@@ -2,7 +2,7 @@
 Install this javascript code in some injection extension, and you'll get a button below videos (posted on twitter / x) that go directly to the highest quality video file (mp4).
 
 # Sample
-https://github.com/matteyas/TwitterVideoURL/assets/12509132/cbec9b23-c425-4478-b313-2d06af5b53a4
+https://github.com/matteyas/TwitterVideoURL/assets/12509132/67ba17cb-cea7-422d-986c-c38e59ddbff3
 
 # Code
 ```js
