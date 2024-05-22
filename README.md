@@ -146,7 +146,7 @@ function injectLink(url) {
                 //console.log('XHR request made:', this.responseURL);
                 if (this.responseType != "arraybuffer" && this.responseText.includes("threaded_conversation_with_injections_v2")) {
                 	const found_url = findHighestBitrateUrl(this.responseText);
-                	injectLink(found_url);
+                	if (found_url.includes(".mp4")) { injectLink(found_url); }
                 	//console.log('XHR response:', findHighestBitrateUrl(this.responseText));
                 	XMLHttpRequest.prototype.open = originalXhrOpen;
                 }
