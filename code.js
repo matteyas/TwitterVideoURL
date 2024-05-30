@@ -5,6 +5,34 @@ class JSONStepper {
     this.modifiedString = jsonString;
   }
   
+  fetch(keyword) {
+    const jsonData = JSON.parse(this.modifiedString);
+    
+    function rec_fetch(obj, property) {
+      if (typeof obj !== 'object') {
+        return null;
+      }
+      
+      if (obj.hasOwnProperty(keyword)) {
+        return obj[keyword];
+      }
+      
+      for (const key in obj) {
+        const new_obj = obj[key];
+        if (typeof new_obj === 'object') {
+          const result = rec_fetch(new_obj, keyword);
+          if (result !== null) {
+            return result;
+          }
+        }
+      }
+      
+      return null;
+    }
+    
+    return rec_fetch(jsonData, keyword);
+  }
+  
   seek(keyword) {
     // Search for the keyword starting from the current index
     const index = this.jsonString.indexOf(keyword, this.currentIndex);
@@ -88,11 +116,19 @@ class JSONStepper {
   }
 }
 
-function findHighestBitrateUrl(jsonString) {	
+function findHighestBitrateUrl(jsonString) {
   const stepper = new JSONStepper(jsonString);
   
-  stepper.seek('"source"');
-  stepper.step('"legacy"');
+  const current_url = new URL(document.URL);
+  const id = current_url.pathname.split('/').pop();
+  while (true) {
+    const maybe_null = stepper.step('"legacy"');
+    if (maybe_null == null) return null;
+    
+    let check_id = stepper.fetch('expanded_url');
+    if (check_id == null) continue;
+    else if (check_id.includes(id)) break;
+  }
   
   return stepper.findHighestBitrateUrl();
 }
@@ -135,11 +171,13 @@ function injectLink(url) {
   XMLHttpRequest.prototype.open = function() {
     this.addEventListener('readystatechange', function() {
       if (this.readyState === 4) {
-        //console.log('XHR request made:', this.responseURL);
+        // console.log('XHR request made:', this.responseURL);
+        // console.log('XHR response:', this.responseText);
+        // console.log('try find url:', findHighestBitrateUrl(this.responseText));
         if (this.responseType != "arraybuffer" && this.responseText.includes("threaded_conversation_with_injections_v2")) {
           const found_url = findHighestBitrateUrl(this.responseText);
           if (found_url.includes(".mp4")) { injectLink(found_url); }
-          //console.log('XHR response:', findHighestBitrateUrl(this.responseText));
+          // console.log('XHR url found:', findHighestBitrateUrl(this.responseText));
           XMLHttpRequest.prototype.open = originalXhrOpen;
         }
       }
