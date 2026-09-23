@@ -159,7 +159,7 @@ function injectLink(url) {
   //link.style.width = '140px';
   
   // Find the target element
-  const targetElement = document.querySelectorAll('[class="css-175oi2r r-9aw3ui r-1s2bzr4"]')[0];
+  const targetElement = document.querySelectorAll('[class="css-g5y9jx r-9aw3ui r-1s2bzr4"]')[0];
   if (targetElement) {
     // Insert the link after the target element
     targetElement.insertAdjacentElement('afterend', link);
